@@ -1,0 +1,325 @@
+[gd_scene format=3 uid="uid://dxkt3ttny13lu"]
+
+[ext_resource type="Script" uid="uid://dp8agc7mjehaq" path="res://sistemas/dialogue_system/scripts/dialogue_box.gd" id="1_script"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_slot1"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"idle",
+"speed": 9.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_slot2"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_slot3"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_slot4"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_portrait"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.03, 0.02, 0.1, 0.97)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.55, 0.28, 0.85, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_portrait"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_namebox"]
+content_margin_left = 12.0
+content_margin_top = 5.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+bg_color = Color(0.1, 0.04, 0.25, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.28, 0.85, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_textbox"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.04, 0.02, 0.12, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.28, 0.85, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skip_normal"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.15, 0.06, 0.3, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5, 0.25, 0.78, 0.75)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skip_hover"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.28, 0.12, 0.52, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65, 0.35, 0.95, 0.95)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="DialogueLayer" type="CanvasLayer" unique_id=1642225395]
+layer = 10
+script = ExtResource("1_script")
+
+[node name="DialogueScene" type="Control" parent="." unique_id=119562064]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CharacterSlot1" type="Control" parent="DialogueScene" unique_id=36856979]
+layout_mode = 1
+anchor_left = 0.02
+anchor_top = 0.05
+anchor_right = 0.22
+anchor_bottom = 0.74
+offset_left = -25.039999
+offset_top = -205.4
+offset_right = -25.039993
+offset_bottom = -205.4
+mouse_filter = 2
+
+[node name="Sprite1" type="AnimatedSprite2D" parent="DialogueScene/CharacterSlot1" unique_id=718978288]
+position = Vector2(143, 276)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_slot1")
+animation = &"idle"
+
+[node name="CharacterSlot2" type="Control" parent="DialogueScene" unique_id=1516285265]
+layout_mode = 1
+anchor_left = 0.26
+anchor_top = 0.05
+anchor_right = 0.48
+anchor_bottom = 0.74
+mouse_filter = 2
+
+[node name="Sprite2" type="AnimatedSprite2D" parent="DialogueScene/CharacterSlot2" unique_id=232045688]
+position = Vector2(-176.51997, 346.6)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_slot2")
+animation = &"idle"
+
+[node name="CharacterSlot3" type="Control" parent="DialogueScene" unique_id=1477004257]
+layout_mode = 1
+anchor_left = 0.52
+anchor_top = 0.05
+anchor_right = 0.74
+anchor_bottom = 0.74
+mouse_filter = 2
+
+[node name="Sprite3" type="AnimatedSprite2D" parent="DialogueScene/CharacterSlot3" unique_id=680895599]
+position = Vector2(421.96002, 80.59999)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_slot3")
+animation = &"idle"
+
+[node name="CharacterSlot4" type="Control" parent="DialogueScene" unique_id=413880347]
+layout_mode = 1
+anchor_left = 0.78
+anchor_top = 0.05
+anchor_right = 0.98
+anchor_bottom = 0.74
+mouse_filter = 2
+
+[node name="Sprite4" type="AnimatedSprite2D" parent="DialogueScene/CharacterSlot4" unique_id=153339165]
+position = Vector2(122.440094, 317.6)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_slot4")
+animation = &"idle"
+
+[node name="DialogueBox" type="Control" parent="DialogueScene" unique_id=1288840255]
+layout_mode = 1
+anchor_top = 0.74
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="PortraitBox" type="Panel" parent="DialogueScene/DialogueBox" unique_id=410065409]
+z_index = -1
+layout_mode = 1
+offset_left = 16.0
+offset_top = 11.47998
+offset_right = 171.0
+offset_bottom = 165.47998
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_portrait")
+
+[node name="PortraitSprite" type="AnimatedSprite2D" parent="DialogueScene/DialogueBox/PortraitBox" unique_id=410065410]
+position = Vector2(70, 71.00001)
+scale = Vector2(0.46857136, 0.39175254)
+sprite_frames = SubResource("SpriteFrames_portrait")
+animation = &"idle"
+
+[node name="TextArea" type="Control" parent="DialogueScene/DialogueBox" unique_id=410065411]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 179.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NameBox" type="Panel" parent="DialogueScene/DialogueBox/TextArea" unique_id=410065412]
+layout_mode = 1
+offset_left = 1.0
+offset_top = -9.52002
+offset_right = 201.0
+offset_bottom = 26.47998
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_namebox")
+
+[node name="NameLabel" type="Label" parent="DialogueScene/DialogueBox/TextArea/NameBox" unique_id=407645197]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 0.47998047
+offset_right = 3.0
+offset_bottom = 0.47998047
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Nombre"
+vertical_alignment = 1
+
+[node name="TextBox" type="Panel" parent="DialogueScene/DialogueBox/TextArea" unique_id=410065413]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 39.47998
+offset_right = 1.0
+offset_bottom = 3.4799805
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_textbox")
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueScene/DialogueBox/TextArea/TextBox" unique_id=2078695403]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 10.0
+offset_right = -14.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.95, 0.93, 1, 1)
+theme_override_font_sizes/normal_font_size = 17
+bbcode_enabled = true
+scroll_active = false
+
+[node name="ContinueIndicator" type="Label" parent="DialogueScene/DialogueBox/TextArea/TextBox" unique_id=1344282451]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -36.0
+offset_top = -32.0
+offset_right = -6.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.85, 0.72, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "▼"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkipButton" type="Button" parent="DialogueScene/DialogueBox" unique_id=833255720]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_top = -46.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.82, 0.72, 1, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_skip_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_skip_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skip_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_skip_normal")
+text = "Saltar  ▶▶"

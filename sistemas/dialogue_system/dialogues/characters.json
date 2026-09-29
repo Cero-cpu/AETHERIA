@@ -1,0 +1,14 @@
+{
+  "characters": {
+	"ignia": {
+	  "display_name": "Ignia",
+	  "name_color": "#FF8B35"
+	},
+	"Vespera": {
+	  "display_name": "Vespera",
+	  "name_color": "#9B6FD4"
+
+	},
+
+  }
+}

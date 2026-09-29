@@ -1,0 +1,74 @@
+{
+	"scene_characters": [
+		{
+			"id": "ignia",
+			"slot": 1
+		},
+		{
+			"id": "Vespera",
+			"slot": 2
+		}
+	],
+	"lines": [
+		{
+			"speaker_id": "ignia",
+			"expression": "coqueta",
+			"text": "¿Qué haces aquí sola otra vez, Vespera? ¿Esperando a alguien?"
+		},
+		{
+			"speaker_id": "Vespera",
+			"expression": "incomoda",
+			"text": "No es de tu incumbencia, Ignia. Y deja de sonreír así, me pone nerviosa."
+		},
+		{
+			"speaker_id": "ignia",
+			"expression": "rie_alto",
+			"text": "¡Jajaja! ¿Nerviosa? ¡Tú! La gran Vespera, nerviosa por una sonrisa."
+		},
+		{
+			"speaker_id": "Vespera",
+			"expression": "enojada",
+			"text": "No me estés provocando o te juro que..."
+		},
+		{
+			"speaker_id": "ignia",
+			"expression": "saca_lengua",
+			"text": "¿Qué? ¿Qué me vas a hacer? Vamos, dímelo~"
+		},
+		{
+			"speaker_id": "Vespera",
+			"expression": "pensativa",
+			"text": "..."
+		},
+		{
+			"speaker_id": "Vespera",
+			"expression": "sonrojada",
+			"text": "Eres... insoportable. De verdad."
+		},
+		{
+			"speaker_id": "ignia",
+			"expression": "mira_contenta",
+			"text": "Y aun así aquí sigues. Algo tiene que gustarte de mí."
+		},
+		{
+			"speaker_id": "Vespera",
+			"expression": "sssh",
+			"text": "Cállate. Ya."
+		},
+		{
+			"speaker_id": "ignia",
+			"expression": "confianza",
+			"text": "Como quieras. Pero ya sabes dónde encontrarme si cambias de opinión."
+		},
+		{
+			"speaker_id": "Vespera",
+			"expression": "seductora",
+			"text": "No lo haré."
+		},
+		{
+			"speaker_id": "Vespera",
+			"expression": "sonriente",
+			"text": "...Quizás."
+		}
+	]
+}
