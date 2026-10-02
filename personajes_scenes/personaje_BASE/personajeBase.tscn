@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bev3iw2ho2ylf"]
 
+[ext_resource type="Script" uid="uid://bja47cd2p37sf" path="res://personajes_scenes/personaje_BASE/camara_base.gd" id="1_kvcc3"]
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1040658430]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2127559064]
@@ -7,4 +9,5 @@
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1173154535]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=308759502]
-zoom = Vector2(2, 2)
+zoom = Vector2(2.6, 2.6)
+script = ExtResource("1_kvcc3")

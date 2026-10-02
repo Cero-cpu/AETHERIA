@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://0d8qup1urj7"]
+
+[ext_resource type="PackedScene" uid="uid://c6844hrvmmxo2" path="res://sistemas/dialogue_system/scenes/dialogue_trigger.tscn" id="1_7sluv"]
+
+[node name="Node2D" type="Node2D" unique_id=1035675120]
+texture_filter = 1
+
+[node name="sprite" type="Node2D" parent="." unique_id=2005012038]
+
+[node name="DialogueTrigger" parent="sprite" unique_id=1873426623 instance=ExtResource("1_7sluv")]

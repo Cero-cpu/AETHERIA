@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://c2l2piys84wx7"]
+
+[ext_resource type="PackedScene" uid="uid://0d8qup1urj7" path="res://personajes_scenes/NPCBASE/npcBase.tscn" id="1_hpobh"]
+[ext_resource type="Texture2D" uid="uid://cr88jb0sn21gg" path="res://personajes_scenes/POR REINOS/Pyrothar/ignia/sprites_animations/idle.png" id="2_3wpv6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7rhr"]
+atlas = ExtResource("2_3wpv6")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsk7m"]
+atlas = ExtResource("2_3wpv6")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdmem"]
+atlas = ExtResource("2_3wpv6")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yf2n"]
+atlas = ExtResource("2_3wpv6")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_051pt"]
+atlas = ExtResource("2_3wpv6")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o31xf"]
+atlas = ExtResource("2_3wpv6")
+region = Rect2(1280, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj4en"]
+atlas = ExtResource("2_3wpv6")
+region = Rect2(1536, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xi40a"]
+atlas = ExtResource("2_3wpv6")
+region = Rect2(1792, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2j7p"]
+atlas = ExtResource("2_3wpv6")
+region = Rect2(2048, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mlp5k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7rhr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsk7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdmem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yf2n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_051pt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o31xf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bj4en")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xi40a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2j7p")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Node2D" unique_id=1035675120 instance=ExtResource("1_hpobh")]
+
+[node name="DialogueTrigger" parent="sprite" parent_id_path=PackedInt32Array(2005012038) index="0" unique_id=1873426623]
+dialogue_path = "res://sistemas/dialogue_system/dialogues/test_ignia_vespera.json"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="sprite" parent_id_path=PackedInt32Array(2005012038) index="1" unique_id=53126168]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_mlp5k")
+autoplay = "default"
+frame_progress = 0.17145263

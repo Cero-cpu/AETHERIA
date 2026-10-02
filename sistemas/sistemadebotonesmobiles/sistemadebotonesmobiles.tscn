@@ -1,0 +1,359 @@
+[gd_scene format=3 uid="uid://bq4nptfcb0qu7"]
+
+[ext_resource type="Script" uid="uid://dqnjcbw77s7j5" path="res://sistemas/sistemadebotonesmobiles/sistemadebotonesmobiles.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://b5vnagfqa4t44" path="res://sistemas/sistemadebotonesmobiles/virtual_joystick.gd" id="2_joystick"]
+[ext_resource type="Script" uid="uid://d0c2vpjlx6mf3" path="res://sistemas/sistemadebotonesmobiles/touch_button.gd" id="3_button"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joy_base"]
+bg_color = Color(0.08, 0.12, 0.2, 0.55)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.2, 0.8, 1, 0.85)
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joy_knob"]
+bg_color = Color(0.25, 0.85, 1, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.95, 1, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ataque"]
+bg_color = Color(0.42, 0.1, 0.12, 0.8)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.35, 0.38, 0.95)
+corner_radius_top_left = 55
+corner_radius_top_right = 55
+corner_radius_bottom_right = 55
+corner_radius_bottom_left = 55
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_saltar"]
+bg_color = Color(0.08, 0.22, 0.38, 0.8)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.2, 0.85, 1, 0.95)
+corner_radius_top_left = 43
+corner_radius_top_right = 43
+corner_radius_bottom_right = 43
+corner_radius_bottom_left = 43
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dash"]
+bg_color = Color(0.06, 0.28, 0.22, 0.8)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.2, 0.9, 0.6, 0.95)
+corner_radius_top_left = 43
+corner_radius_top_right = 43
+corner_radius_bottom_right = 43
+corner_radius_bottom_left = 43
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hab1"]
+bg_color = Color(0.32, 0.22, 0.05, 0.8)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.78, 0.2, 0.95)
+corner_radius_top_left = 43
+corner_radius_top_right = 43
+corner_radius_bottom_right = 43
+corner_radius_bottom_left = 43
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ult"]
+bg_color = Color(0.42, 0.08, 0.32, 0.85)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.95, 0.35, 0.9, 0.95)
+corner_radius_top_left = 45
+corner_radius_top_right = 45
+corner_radius_bottom_right = 45
+corner_radius_bottom_left = 45
+
+[node name="SistemaBotonesMobiles" type="CanvasLayer" unique_id=1658380731]
+layer = 10
+script = ExtResource("1_main")
+
+[node name="Control" type="Control" parent="." unique_id=807731357]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LeftContainer" type="Control" parent="Control" unique_id=1266736421]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = -210.0
+offset_right = 210.0
+offset_bottom = -60.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="VirtualJoystick" type="Control" parent="Control/LeftContainer" unique_id=1532986858 node_paths=PackedStringArray("base_node", "knob_node")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_joystick")
+base_node = NodePath("Base")
+knob_node = NodePath("Knob")
+
+[node name="Base" type="Panel" parent="Control/LeftContainer/VirtualJoystick" unique_id=192743637]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -11.0
+offset_right = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_joy_base")
+
+[node name="Knob" type="Panel" parent="Control/LeftContainer/VirtualJoystick" unique_id=1924725638]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.333
+anchor_top = 0.233
+anchor_right = 0.92
+anchor_bottom = 0.75
+offset_left = 0.05
+offset_top = 0.05
+offset_right = -10.0
+offset_bottom = -7.5
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_joy_knob")
+
+[node name="RightContainer" type="Control" parent="Control" unique_id=1125607945]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -340.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="BotonAtaqueBasico" type="Control" parent="Control/RightContainer" unique_id=543210987]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -179.0
+offset_right = -60.0
+offset_bottom = -69.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("3_button")
+action_name = "ataque_basico"
+
+[node name="VisualPanel" type="Panel" parent="Control/RightContainer/BotonAtaqueBasico" unique_id=543210988]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ataque")
+
+[node name="Label" type="Label" parent="Control/RightContainer/BotonAtaqueBasico" unique_id=543210989]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "⚔️
+ATAQUE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonSaltar" type="Control" parent="Control/RightContainer" unique_id=1012595907]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -81.0
+offset_top = -84.0
+offset_right = 23.0
+offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("3_button")
+action_name = "salto"
+
+[node name="VisualPanel" type="Panel" parent="Control/RightContainer/BotonSaltar" unique_id=40805824]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_saltar")
+
+[node name="Label" type="Label" parent="Control/RightContainer/BotonSaltar" unique_id=1447437465]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "▲
+SALTO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonDash" type="Control" parent="Control/RightContainer" unique_id=987654321]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -91.0
+offset_top = -295.0
+offset_right = 14.0
+offset_bottom = -193.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("3_button")
+action_name = "dash"
+
+[node name="VisualPanel" type="Panel" parent="Control/RightContainer/BotonDash" unique_id=987654322]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dash")
+
+[node name="Label" type="Label" parent="Control/RightContainer/BotonDash" unique_id=987654323]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "⚡
+DASH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonHabilidad1" type="Control" parent="Control/RightContainer" unique_id=1997149371]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -307.0
+offset_top = -110.0
+offset_right = -187.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("3_button")
+action_name = "habilidad_1"
+
+[node name="VisualPanel" type="Panel" parent="Control/RightContainer/BotonHabilidad1" unique_id=1875815146]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hab1")
+
+[node name="Label" type="Label" parent="Control/RightContainer/BotonHabilidad1" unique_id=1527216945]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "💥
+HAB 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonHabilidadDefinitiva" type="Control" parent="Control/RightContainer" unique_id=1006780387]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -295.0
+offset_top = -263.0
+offset_right = -179.0
+offset_bottom = -151.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("3_button")
+action_name = "habilidad_definitiva"
+
+[node name="VisualPanel" type="Panel" parent="Control/RightContainer/BotonHabilidadDefinitiva" unique_id=1976920479]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ult")
+
+[node name="Label" type="Label" parent="Control/RightContainer/BotonHabilidadDefinitiva" unique_id=916435298]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "★
+DEFINITIVA"
+horizontal_alignment = 1
+vertical_alignment = 1
