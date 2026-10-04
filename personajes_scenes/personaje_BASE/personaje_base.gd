@@ -50,6 +50,12 @@ var componentes_mecanicas: Array[MecanicaBase] = []
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
+	add_to_group("jugador")
+	# El jugador existe en Capa 2 y solo choca físicamente con Capa 1 (Mundo/Escenario)
+	# Esto permite atravesar enemigos suavemente sin empujarlos
+	collision_layer = 2
+	collision_mask = 1
+
 	calculate_physics_parameters()
 	if animated_sprite:
 		animated_sprite.animation_finished.connect(_on_action_anim_completed)
@@ -216,12 +222,15 @@ func _physics_process(delta: float) -> void:
 			movement_blocked = true
 			break
 
-	if movement_blocked:
-		velocity.x = move_toward(velocity.x, 0.0, decel * delta)
-	elif direction != 0.0:
+	# Permitir orientar la mirada / sprite aunque el movimiento de posición esté bloqueado
+	if direction != 0.0:
 		facing_direction = sign(direction)
 		if animated_sprite:
 			animated_sprite.flip_h = (direction < 0.0)
+
+	if movement_blocked:
+		velocity.x = move_toward(velocity.x, 0.0, decel * delta)
+	elif direction != 0.0:
 		velocity.x = move_toward(velocity.x, direction * max_speed, accel * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, decel * delta)
@@ -262,17 +271,25 @@ func _buscar_componente_por_tipo(tipo: Variant) -> MecanicaBase:
 
 func perform_jump() -> void:
 	velocity.y = jump_velocity
+	var is_double_jump := (jumps_left < max_jumps - 1)
 	jumps_left -= 1
 	jump_buffer_timer = 0.0
-	play_anim_if_exists("jump")
-	if animated_sprite and animated_sprite.animation == "jump":
+	
+	if is_double_jump:
+		if not play_anim_if_exists("dublejump"):
+			if not play_anim_if_exists("doublejump"):
+				play_anim_if_exists("jump")
+	else:
+		play_anim_if_exists("jump")
+		
+	if animated_sprite and animated_sprite.animation in ["jump", "dublejump", "doublejump"]:
 		animated_sprite.set_frame_and_progress(0, 0.0)
 
 func _on_action_anim_completed() -> void:
 	if not animated_sprite:
 		return
 	var current_anim = animated_sprite.animation
-	if current_anim in ["ataquebasico", "habilidad1", "habilidad2", "definitiva", "ult", "habilidad_definitiva", "dash"]:
+	if current_anim in ["ataquebasico", "ataquebasico1", "ataquebasico2", "habilidad1", "habilidad2", "definitiva", "ult", "habilidad_definitiva", "dash"] or current_anim.begins_with("ataquebasico"):
 		is_attacking = false
 		is_using_skill = false
 		is_dashing = false
@@ -317,19 +334,24 @@ func update_animations(direction: float) -> void:
 		
 	if not is_on_floor():
 		if velocity.y < 0.0:
-			if animated_sprite and animated_sprite.animation != "jump":
-				play_anim_if_exists("jump")
+			if animated_sprite and not (animated_sprite.animation in ["jump", "dublejump", "doublejump"]):
+				if not play_anim_if_exists("jump"):
+					play_anim_if_exists("dublejump")
 		else:
-			play_anim_if_exists("fall")
+			if not play_anim_if_exists("fall"):
+				pass
 	else:
 		if direction != 0.0:
-			play_anim_if_exists("walk")
+			if not play_anim_if_exists("run"):
+				play_anim_if_exists("walk")
 		else:
 			play_anim_if_exists("idle")
 
-func play_anim_if_exists(anim_name: String) -> void:
+func play_anim_if_exists(anim_name: String) -> bool:
 	if not animated_sprite:
-		return
+		return false
 	if animated_sprite.sprite_frames and animated_sprite.sprite_frames.has_animation(anim_name):
 		if animated_sprite.animation != anim_name or not animated_sprite.is_playing():
 			animated_sprite.play(anim_name)
+		return true
+	return false

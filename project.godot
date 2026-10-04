@@ -13,11 +13,14 @@ config_version=5
 config/name="AETHERIA"
 run/main_scene="uid://dff2aj6xmx1ip"
 config/features=PackedStringArray("4.7", "Mobile")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [autoload]
 
 DialogueManager="*res://sistemas/dialogue_system/scripts/dialogue_manager.gd"
+SceneManager="*uid://dc6lklqarona3"
 
 [display]
 

@@ -1,17 +1,26 @@
 [gd_scene format=3 uid="uid://cyub4fq62c4vy"]
 
-[ext_resource type="PackedScene" path="res://sistemas/sistemadebotonesmobiles/sistemadebotonesmobiles.tscn" id="1_controls"]
+[ext_resource type="PackedScene" uid="uid://bq4nptfcb0qu7" path="res://sistemas/sistemadebotonesmobiles/sistemadebotonesmobiles.tscn" id="1_controls"]
 
 [node name="Node2D" type="Node2D" unique_id=928974403]
 
 [node name="Personaje" type="Node2D" parent="." unique_id=1356722181]
+z_index = 5
+
+[node name="Marker2D" type="Marker2D" parent="Personaje" unique_id=1185579152]
 
 [node name="tilemaplayers" type="Node2D" parent="." unique_id=1896530133]
 
 [node name="sprites" type="Node2D" parent="." unique_id=1668785259]
 
 [node name="NPCS" type="Node2D" parent="." unique_id=100156684]
+z_index = 5
 
 [node name="UI" type="Node2D" parent="." unique_id=1982736451]
 
 [node name="SistemaBotonesMobiles" parent="UI" unique_id=637211708 instance=ExtResource("1_controls")]
+
+[node name="enemigos" type="Node2D" parent="." unique_id=542734384]
+z_index = 5
+
+[node name="transaccion" type="Node2D" parent="." unique_id=217721086]

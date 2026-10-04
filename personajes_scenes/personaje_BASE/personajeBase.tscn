@@ -2,9 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bja47cd2p37sf" path="res://personajes_scenes/personaje_BASE/camara_base.gd" id="1_kvcc3"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1040658430]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xosji"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1040658430 groups=["player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2127559064]
+shape = SubResource("RectangleShape2D_xosji")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1173154535]
 

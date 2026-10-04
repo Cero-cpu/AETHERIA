@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg7c4u13phm1f"
-path="res://.godot/imported/pixellab-tileset-pixel-art-16-bit-side-scrolling-platformer-b7baa2f4.png-f818906a22133acac1c908238a2118b1.ctex"
+uid="uid://bg6k5u36dykr6"
+path="res://.godot/imported/Laser_sheet.png-3caa2f3ce9e92577d9246d20e3578558.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenasBASE/niveles_Base(scenas)/pruebas/tile/pixellab-tileset-pixel-art-16-bit-side-scrolling-platformer-b7baa2f4.png"
-dest_files=["res://.godot/imported/pixellab-tileset-pixel-art-16-bit-side-scrolling-platformer-b7baa2f4.png-f818906a22133acac1c908238a2118b1.ctex"]
+source_file="res://personajes_scenes/POR REINOS/Sylvaneth/enemigos/golem/spritesheet/Mecha-stone Golem 0.1/weapon PNG/Laser_sheet.png"
+dest_files=["res://.godot/imported/Laser_sheet.png-3caa2f3ce9e92577d9246d20e3578558.ctex"]
 
 [params]
 

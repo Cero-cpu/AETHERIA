@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://g3ho48aw8u87"]
+
+[ext_resource type="Script" uid="uid://ccnubvd7mchi7" path="res://personajes_scenes/POR REINOS/Lumenar/vespera/proyectil_vespera.gd" id="1_proyectil"]
+[ext_resource type="Texture2D" uid="uid://bvxpqldvv1n35" path="res://personajes_scenes/POR REINOS/Lumenar/vespera/sprite_animations/basic.png" id="2_lkcgp"]
+[ext_resource type="Shader" uid="uid://b534a41ss0o3i" path="res://personajes_scenes/POR REINOS/Lumenar/vespera/bola_energia_vespera.gdshader" id="3_shader"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmt2t"]
+atlas = ExtResource("2_lkcgp")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uj41"]
+atlas = ExtResource("2_lkcgp")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnplw"]
+atlas = ExtResource("2_lkcgp")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u07n1"]
+atlas = ExtResource("2_lkcgp")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3svc"]
+atlas = ExtResource("2_lkcgp")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_no8kt"]
+atlas = ExtResource("2_lkcgp")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_add16"]
+atlas = ExtResource("2_lkcgp")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cty4b"]
+atlas = ExtResource("2_lkcgp")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0d6j"]
+atlas = ExtResource("2_lkcgp")
+region = Rect2(512, 512, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k60hw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmt2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2uj41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnplw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u07n1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3svc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_no8kt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_add16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cty4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0d6j")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shader"]
+shader = ExtResource("3_shader")
+shader_parameter/velocidad = 2.5
+shader_parameter/intensidad = 1.8
+shader_parameter/radio_bola = 0.62
+shader_parameter/color_nucleo = Color(1, 0.92, 1, 1)
+shader_parameter/color_medio = Color(0.78, 0.08, 1, 1)
+shader_parameter/color_llama = Color(0.38, 0, 0.85, 1)
+shader_parameter/color_borde = Color(0.14, 0, 0.42, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_proyectil"]
+radius = 4.0
+
+[node name="ProyectilVespera" type="Area2D" unique_id=736848314]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_proyectil")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1547323088]
+texture_filter = 1
+position = Vector2(0, 4.7683716e-07)
+scale = Vector2(0.023437504, 0.01904297)
+sprite_frames = SubResource("SpriteFrames_k60hw")
+frame_progress = 0.78340715
+
+[node name="FuegoMagicoShader" type="ColorRect" parent="." unique_id=999888777]
+material = SubResource("ShaderMaterial_shader")
+offset_left = -13.0
+offset_top = -14.0
+offset_right = 13.0
+offset_bottom = 15.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1160035638]
+shape = SubResource("CircleShape2D_proyectil")

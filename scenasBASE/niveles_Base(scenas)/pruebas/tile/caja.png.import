@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doyeuvhac0foi"
-path="res://.godot/imported/pixellab-tileset-pixel-art-16-bit-side-scrolling-platformer-godot-b7baa2f4.png-e28a2df64b70813d72eb12b37600e207.ctex"
+uid="uid://d3h8lx6qcgg3r"
+path="res://.godot/imported/caja.png-98adcaed1a5ef9bfd16926f17f01b644.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenasBASE/niveles_Base(scenas)/pruebas/tile/pixellab-tileset-pixel-art-16-bit-side-scrolling-platformer-godot-b7baa2f4.png"
-dest_files=["res://.godot/imported/pixellab-tileset-pixel-art-16-bit-side-scrolling-platformer-godot-b7baa2f4.png-e28a2df64b70813d72eb12b37600e207.ctex"]
+source_file="res://scenasBASE/niveles_Base(scenas)/pruebas/tile/caja.png"
+dest_files=["res://.godot/imported/caja.png-98adcaed1a5ef9bfd16926f17f01b644.ctex"]
 
 [params]
 

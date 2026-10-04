@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6licyd3xd0sn"
-path="res://.godot/imported/piso.png-080e56a3dc68ca9530558b9afac6e54d.ctex"
+uid="uid://bvmw1oebfbnpi"
+path="res://.godot/imported/pixellab-Animate-an-aggresive-pointing--1790992348629.png-ac70b98f4638d53f091b75442d1a56a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenasBASE/niveles_Base(scenas)/pruebas/tile/piso.png"
-dest_files=["res://.godot/imported/piso.png-080e56a3dc68ca9530558b9afac6e54d.ctex"]
+source_file="res://personajes_scenes/POR REINOS/Lumenar/vespera/sprite_animations/pixellab-Animate-an-aggresive-pointing--1790992348629.png"
+dest_files=["res://.godot/imported/pixellab-Animate-an-aggresive-pointing--1790992348629.png-ac70b98f4638d53f091b75442d1a56a1.ctex"]
 
 [params]
 

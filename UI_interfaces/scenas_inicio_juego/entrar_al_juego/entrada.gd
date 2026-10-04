@@ -22,18 +22,20 @@ signal secuencia_terminada
 @onready var logo: TextureRect = $TextureRect
 
 func _ready() -> void:
+	# Pantalla completa negra para que no haya flash blanco ni ningún artefacto visual
+	RenderingServer.set_default_clear_color(Color.BLACK)
 	_validar_nodos()
 	_preparar_estado_inicial()
 	iniciar_secuencia()
 
 func _validar_nodos() -> void:
-	# Previene crasheos silenciosos si el nodo fue renombrado o borrado por error
 	assert(logo != null, "Error crítico: Nodo TextureRect no encontrado en la escena.")
 
 func _preparar_estado_inicial() -> void:
 	logo.modulate = Color.TRANSPARENT
 	logo.scale = escala_inicial
 	# Se centra el pivote dinámicamente asegurando precisión sin importar el tamaño de la imagen
+	await get_tree().process_frame
 	logo.pivot_offset = logo.size / 2.0
 
 func iniciar_secuencia() -> void:
@@ -61,13 +63,12 @@ func iniciar_secuencia() -> void:
 	tween.tween_callback(_al_terminar_secuencia)
 
 func _al_terminar_secuencia() -> void:
-	# Emitimos la señal por si otro nodo necesita reaccionar al fin de la intro
 	secuencia_terminada.emit()
 	_cargar_siguiente_escena()
 
 func _cargar_siguiente_escena() -> void:
 	if ruta_siguiente_escena.is_empty():
-		printerr("IntroCinematica: Falta configurar la ruta de la siguiente escena para Runna Terra.")
+		printerr("IntroCinematica: Falta configurar la ruta de la siguiente escena.")
 		return
 		
 	var error: int = get_tree().change_scene_to_file(ruta_siguiente_escena)
