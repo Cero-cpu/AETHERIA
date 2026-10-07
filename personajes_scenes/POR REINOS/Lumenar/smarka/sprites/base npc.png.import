@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://defxxb5l18yc1"
-path="res://.godot/imported/caminar.png-8c2015380d5f2e203f0ac81b31d34d03.ctex"
+uid="uid://bnaw40okdy4gy"
+path="res://.godot/imported/base npc.png-0575600399c3b42ddd24b62421ef2082.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://personajes_scenes/POR REINOS/Lumenar/smarka/caminar.png"
-dest_files=["res://.godot/imported/caminar.png-8c2015380d5f2e203f0ac81b31d34d03.ctex"]
+source_file="res://personajes_scenes/POR REINOS/Lumenar/smarka/sprites/base npc.png"
+dest_files=["res://.godot/imported/base npc.png-0575600399c3b42ddd24b62421ef2082.ctex"]
 
 [params]
 

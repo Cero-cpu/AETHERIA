@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://bev3iw2ho2ylf"]
 
 [ext_resource type="Script" uid="uid://bja47cd2p37sf" path="res://personajes_scenes/personaje_BASE/camara_base.gd" id="1_kvcc3"]
+[ext_resource type="Script" uid="uid://dbsqcq266jpvf" path="res://personajes_scenes/personaje_BASE/personaje_base.gd" id="2_base"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xosji"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1040658430 groups=["player"]]
+script = ExtResource("2_base")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2127559064]
 shape = SubResource("RectangleShape2D_xosji")

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dk1ewcb3f67ou"]
+
+[ext_resource type="Script" uid="uid://dbfobcbyu4tf2" path="res://personajes_scenes/POR REINOS/Lumenar/raija/onda_corte_raija.gd" id="1_script"]
+[ext_resource type="Shader" uid="uid://c0g4r1hmr6sxi" path="res://personajes_scenes/POR REINOS/Lumenar/raija/onda_corte_raija.gdshader" id="2_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_onda"]
+shader = ExtResource("2_shader")
+shader_parameter/color_magenta = Color(0.97, 0.07, 0.98, 1)
+shader_parameter/color_violeta = Color(0.62, 0.22, 0.68, 1)
+shader_parameter/color_rosa = Color(1, 0.2, 0.8, 1)
+shader_parameter/color_nucleo = Color(1, 0.95, 1, 1)
+shader_parameter/desvanecimiento = 0.0
+shader_parameter/curvatura = 1.6
+shader_parameter/intensidad = 2.2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onda"]
+size = Vector2(112, 80)
+
+[node name="OndaCorteRaija" type="Area2D" unique_id=1414650988]
+texture_filter = 1
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_script")
+
+[node name="SpriteOnda" type="ColorRect" parent="." unique_id=1001761786]
+material = SubResource("ShaderMaterial_onda")
+offset_left = -64.0
+offset_top = -48.0
+offset_right = 64.0
+offset_bottom = 48.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=540832362]
+shape = SubResource("RectangleShape2D_onda")

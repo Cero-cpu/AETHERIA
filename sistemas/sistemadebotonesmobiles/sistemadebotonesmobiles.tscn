@@ -4,89 +4,44 @@
 [ext_resource type="Script" uid="uid://b5vnagfqa4t44" path="res://sistemas/sistemadebotonesmobiles/virtual_joystick.gd" id="2_joystick"]
 [ext_resource type="Script" uid="uid://d0c2vpjlx6mf3" path="res://sistemas/sistemadebotonesmobiles/touch_button.gd" id="3_button"]
 
+; --- Joystick base: circulo transparente con borde blanco visible ---
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joy_base"]
-bg_color = Color(0.08, 0.12, 0.2, 0.55)
+bg_color = Color(1, 1, 1, 0.0)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.2, 0.8, 1, 0.85)
+border_color = Color(1, 1, 1, 0.75)
 corner_radius_top_left = 75
 corner_radius_top_right = 75
 corner_radius_bottom_right = 75
 corner_radius_bottom_left = 75
 
+; --- Joystick knob: disco blanco visible ---
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joy_knob"]
-bg_color = Color(0.25, 0.85, 1, 0.9)
+bg_color = Color(1, 1, 1, 0.18)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.8, 0.95, 1, 1)
+border_color = Color(1, 1, 1, 0.85)
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ataque"]
-bg_color = Color(0.42, 0.1, 0.12, 0.8)
+; --- Botones de accion: centro transparente, borde blanco claro ---
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(1, 1, 1, 0.0)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(1, 0.35, 0.38, 0.95)
+border_color = Color(1, 1, 1, 0.75)
 corner_radius_top_left = 55
 corner_radius_top_right = 55
 corner_radius_bottom_right = 55
 corner_radius_bottom_left = 55
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_saltar"]
-bg_color = Color(0.08, 0.22, 0.38, 0.8)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.2, 0.85, 1, 0.95)
-corner_radius_top_left = 43
-corner_radius_top_right = 43
-corner_radius_bottom_right = 43
-corner_radius_bottom_left = 43
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dash"]
-bg_color = Color(0.06, 0.28, 0.22, 0.8)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.2, 0.9, 0.6, 0.95)
-corner_radius_top_left = 43
-corner_radius_top_right = 43
-corner_radius_bottom_right = 43
-corner_radius_bottom_left = 43
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hab1"]
-bg_color = Color(0.32, 0.22, 0.05, 0.8)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0.78, 0.2, 0.95)
-corner_radius_top_left = 43
-corner_radius_top_right = 43
-corner_radius_bottom_right = 43
-corner_radius_bottom_left = 43
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ult"]
-bg_color = Color(0.42, 0.08, 0.32, 0.85)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.95, 0.35, 0.9, 0.95)
-corner_radius_top_left = 45
-corner_radius_top_right = 45
-corner_radius_bottom_right = 45
-corner_radius_bottom_left = 45
 
 [node name="SistemaBotonesMobiles" type="CanvasLayer" unique_id=1658380731]
 layer = 10
@@ -167,6 +122,7 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 
+; -------- BOTON ATAQUE --------
 [node name="BotonAtaqueBasico" type="Control" parent="Control/RightContainer" unique_id=543210987]
 layout_mode = 1
 anchors_preset = 3
@@ -191,7 +147,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ataque")
+theme_override_styles/panel = SubResource("StyleBoxFlat_btn")
 
 [node name="Label" type="Label" parent="Control/RightContainer/BotonAtaqueBasico" unique_id=543210989]
 layout_mode = 1
@@ -200,11 +156,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "⚔️
-ATAQUE"
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1, 1, 1, 0.7)
+text = "ATK"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+; -------- BOTON SALTAR --------
 [node name="BotonSaltar" type="Control" parent="Control/RightContainer" unique_id=1012595907]
 layout_mode = 1
 anchors_preset = 3
@@ -229,7 +187,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_saltar")
+theme_override_styles/panel = SubResource("StyleBoxFlat_btn")
 
 [node name="Label" type="Label" parent="Control/RightContainer/BotonSaltar" unique_id=1447437465]
 layout_mode = 1
@@ -240,11 +198,13 @@ offset_top = 3.0
 offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "▲
-SALTO"
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1, 1, 1, 0.7)
+text = "SALTO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+; -------- BOTON DASH --------
 [node name="BotonDash" type="Control" parent="Control/RightContainer" unique_id=987654321]
 layout_mode = 1
 anchors_preset = 3
@@ -269,7 +229,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_dash")
+theme_override_styles/panel = SubResource("StyleBoxFlat_btn")
 
 [node name="Label" type="Label" parent="Control/RightContainer/BotonDash" unique_id=987654323]
 layout_mode = 1
@@ -278,11 +238,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "⚡
-DASH"
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1, 1, 1, 0.7)
+text = "DASH"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+; -------- BOTON HABILIDAD 1 --------
 [node name="BotonHabilidad1" type="Control" parent="Control/RightContainer" unique_id=1997149371]
 layout_mode = 1
 anchors_preset = 3
@@ -307,7 +269,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_hab1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_btn")
 
 [node name="Label" type="Label" parent="Control/RightContainer/BotonHabilidad1" unique_id=1527216945]
 layout_mode = 1
@@ -316,11 +278,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "💥
-HAB 1"
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1, 1, 1, 0.7)
+text = "HAB"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+; -------- BOTON DEFINITIVA --------
 [node name="BotonHabilidadDefinitiva" type="Control" parent="Control/RightContainer" unique_id=1006780387]
 layout_mode = 1
 anchors_preset = 3
@@ -345,7 +309,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ult")
+theme_override_styles/panel = SubResource("StyleBoxFlat_btn")
 
 [node name="Label" type="Label" parent="Control/RightContainer/BotonHabilidadDefinitiva" unique_id=916435298]
 layout_mode = 1
@@ -354,8 +318,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 11
-text = "★
-DEFINITIVA"
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1, 1, 1, 0.7)
+text = "ULT"
 horizontal_alignment = 1
 vertical_alignment = 1

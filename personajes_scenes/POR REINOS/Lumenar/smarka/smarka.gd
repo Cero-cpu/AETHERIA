@@ -1,20 +1,7 @@
-extends CharacterBody2D
+extends "res://personajes_scenes/personaje_BASE/personaje_base.gd"
 
-@export var velocidad: float = 200.0
+# Script para el personaje Smarka.
+# Hereda el sistema de físicas, movimiento, salto y doble salto de PersonajeBase.
 
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-
-func _physics_process(delta: float) -> void:
-	# Dirección de -1 a 1 en cada eje (flechas / WASD según tu Input Map)
-	var direccion := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
-	velocity = direccion * velocidad
-	move_and_slide()
-
-	if direccion != Vector2.ZERO:
-		sprite.play("walk")
-		# Voltear el sprite según hacia dónde camina
-		if direccion.x != 0:
-			sprite.flip_h = direccion.x < 0
-	else:
-		sprite.play("idle")  # o sprite.stop() si no tienes animación idle
+func _ready() -> void:
+	super._ready()

@@ -60,4 +60,4 @@ Al jugar, cuando el personaje toque la `Puerta_Hacia_Cocina` en la Sala, la pant
 ## Reglas de Oro para evitar Errores
 - **No repitas IDs en una misma escena:** No puedes tener dos `spawn_point.gd` con el mismo ID en el mismo cuarto.
 - **Si hay errores "fantasma":** Si modificas los scripts globales y Godot se queja de que "SceneManager" no existe, limpia la pestaña de Errores abajo y dale al botón de "Play" para que Godot refresque su caché.
-- **Transiciones limpias:** Como el fundido se crea por código puro en el `scene_manager.gd`, no necesitas preocuparte por añadir CanvasLayers ni ColorRects manualmente en cada escena.
+- **Transiciones limpias:** Como el fundido se crea por código puro en el `scene_manager.gd`, no necesitas preocuparte por añadir CanvasLayers ni ColorRects manualmente en cada escena. 

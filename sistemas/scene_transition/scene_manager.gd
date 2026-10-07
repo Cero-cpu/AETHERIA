@@ -1,51 +1,37 @@
-extends Node
+extends CanvasLayer
 
 var current_spawn_door_id: String = ""
 
-# Componentes de UI para el fade creados por código 
-# (así evitamos depender de un .tscn externo y es 100% escalable)
-var canvas_layer: CanvasLayer
-var color_rect: ColorRect
-
-func _ready() -> void:
-	# Creamos la capa que estará sobre todo el juego
-	canvas_layer = CanvasLayer.new()
-	canvas_layer.layer = 100 
-	add_child(canvas_layer)
-	
-	# Creamos el fondo negro
-	color_rect = ColorRect.new()
-	color_rect.color = Color(0, 0, 0, 0) # Empieza totalmente transparente
-	color_rect.set_anchors_preset(Control.PRESET_FULL_RECT) # Cubre toda la pantalla
-	color_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	canvas_layer.add_child(color_rect)
+# FadeRect es un nodo hijo definido en scene_manager.tscn — sin código generador
+@onready var fade_rect: ColorRect = $FadeRect
 
 func change_scene(scene_path: String, destination_door_id: String) -> void:
 	current_spawn_door_id = destination_door_id
 	
 	# 1. Fade Out (La pantalla se funde a negro)
 	var tween = create_tween()
-	tween.tween_property(color_rect, "color:a", 1.0, 0.5)
+	tween.tween_property(fade_rect, "color:a", 1.0, 0.5)
 	await tween.finished
 	
 	# 2. Cambiar de escena
 	var error = get_tree().change_scene_to_file(scene_path)
 	if error != OK:
 		print("Error al cambiar a la escena: ", scene_path)
-		return
+		return 
 	
 	# Esperar a que la escena se cargue por completo (2 frames por seguridad)
 	await get_tree().process_frame
 	await get_tree().process_frame
 	
 	# 3. Buscar al jugador y colocarlo en el Spawn Point correcto
-	_position_player_at_spawn()
+	#    (await necesario porque internamente espera un frame para snapear la cámara)
+	await _position_player_at_spawn()
 	
 	# 4. Fade In (La pantalla vuelve a la normalidad)
 	var tween_in = create_tween()
-	tween_in.tween_property(color_rect, "color:a", 0.0, 0.5)
+	tween_in.tween_property(fade_rect, "color:a", 0.0, 0.5)
 
-func _position_player_at_spawn() -> void:
+func _position_player_at_spawn() -> void: # implicitly async due to awaits inside
 	if current_spawn_door_id == "":
 		return
 		
@@ -59,10 +45,21 @@ func _position_player_at_spawn() -> void:
 			break
 			
 	if target_spawn != null:
-		# Asumimos que tu jugador está en el grupo "player" o lo buscamos por nombre
 		var players = get_tree().get_nodes_in_group("player") 
 		if players.size() > 0:
-			players[0].global_position = target_spawn.global_position
+			var player = players[0]
+			# 1. Mover el jugador al spawn
+			player.global_position = target_spawn.global_position
+			
+			# 2. Snap de cámara: la forzamos a la nueva posición sin lerping
+			#    para evitar el "acercón brusco" al regresar a una escena anterior.
+			var camera = player.get_node_or_null("Camera2D")
+			if camera is Camera2D:
+				camera.position_smoothing_enabled = false
+				camera.reset_smoothing()
+				# Esperar un frame para que Godot procese la posición antes de reactivar el suavizado
+				await get_tree().process_frame
+				camera.position_smoothing_enabled = true
 		else:
 			print("Advertencia: No se encontró un jugador en el grupo 'player'.")
 	else:

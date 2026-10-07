@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baknj36wob2yu"
-path="res://.godot/imported/walk.png-67e138835ba3a71eabe99d2fdf38c94c.ctex"
+uid="uid://cao8gcoqtvc8q"
+path="res://.godot/imported/ataque2.png-d436fcb6b723aced2d9a9071d0a66268.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://personajes_scenes/POR REINOS/Lumenar/smarka/walk.png"
-dest_files=["res://.godot/imported/walk.png-67e138835ba3a71eabe99d2fdf38c94c.ctex"]
+source_file="res://personajes_scenes/POR REINOS/Lumenar/raija/spritesanimations/ataque2.png"
+dest_files=["res://.godot/imported/ataque2.png-d436fcb6b723aced2d9a9071d0a66268.ctex"]
 
 [params]
 

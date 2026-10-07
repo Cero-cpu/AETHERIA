@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 DialogueManager="*res://sistemas/dialogue_system/scripts/dialogue_manager.gd"
-SceneManager="*uid://dc6lklqarona3"
+SceneManager="*res://sistemas/scene_transition/scene_manager.tscn"
 
 [display]
 

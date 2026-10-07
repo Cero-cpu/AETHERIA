@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cymofdkhv75b"
-path="res://.godot/imported/idle.png-a06d57ebaaaa987aed0646bf9b17d0c8.ctex"
+uid="uid://c0eug53yr4704"
+path="res://.godot/imported/dash.png-b3dbef85d3d62cb2eb68dc171b3b95a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://personajes_scenes/POR REINOS/Lumenar/smarka/idle.png"
-dest_files=["res://.godot/imported/idle.png-a06d57ebaaaa987aed0646bf9b17d0c8.ctex"]
+source_file="res://personajes_scenes/POR REINOS/Lumenar/raija/spritesanimations/dash.png"
+dest_files=["res://.godot/imported/dash.png-b3dbef85d3d62cb2eb68dc171b3b95a8.ctex"]
 
 [params]
 

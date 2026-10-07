@@ -6,7 +6,7 @@ signal button_up
 @export_category("Button Configuration")
 @export var action_name: String = ""
 @export var normal_modulate: Color = Color(1.0, 1.0, 1.0, 0.85)
-@export var pressed_modulate: Color = Color(1.4, 1.4, 1.4, 1.0)
+@export var pressed_modulate: Color = Color(1.0, 1.0, 1.0, 1.0)
 
 var is_pressed: bool = false
 var touch_index: int = -1

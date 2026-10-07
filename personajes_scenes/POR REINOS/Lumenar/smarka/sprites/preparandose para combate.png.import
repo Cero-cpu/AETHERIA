@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6knwxhuv7gia"
-path="res://.godot/imported/pixellab-damelo-sin-fondo-1790729429602.png-75ba0e045a8633332aa61f75023dab8e.ctex"
+uid="uid://c8aerwov7ehc8"
+path="res://.godot/imported/preparandose para combate.png-12d4b9b9e9aa9a1f6edf832102951578.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://personajes_scenes/POR REINOS/Lumenar/smarka/pixellab-damelo-sin-fondo-1790729429602.png"
-dest_files=["res://.godot/imported/pixellab-damelo-sin-fondo-1790729429602.png-75ba0e045a8633332aa61f75023dab8e.ctex"]
+source_file="res://personajes_scenes/POR REINOS/Lumenar/smarka/sprites/preparandose para combate.png"
+dest_files=["res://.godot/imported/preparandose para combate.png-12d4b9b9e9aa9a1f6edf832102951578.ctex"]
 
 [params]
 

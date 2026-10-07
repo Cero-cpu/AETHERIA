@@ -42,6 +42,7 @@ var facing_direction: float = 1.0
 var is_attacking: bool = false
 var is_dashing: bool = false
 var is_using_skill: bool = false
+var is_hit: bool = false
 var action_timer: float = 0.0
 
 # Registro modular de componentes de mecánicas
@@ -103,7 +104,7 @@ func _crear_componentes_por_defecto() -> void:
 	var comp_ataque = MecanicaAtaqueScript.new()
 	comp_ataque.name = "MecanicaAtaque"
 	comp_ataque.action_name = "ataque_basico"
-	comp_ataque.anim_name = "ataquebasico"
+	comp_ataque.anim_name = "ataquebasico1"
 	contenedor.add_child(comp_ataque)
 	componentes_mecanicas.append(comp_ataque)
 	
@@ -139,9 +140,9 @@ func is_action_just_released_safe(action: String) -> bool:
 		return false
 	return Input.is_action_just_released(action)
 
-## Consulta si el personaje está ocupado ejecutando alguna acción
+## Consulta si el personaje está ocupado ejecutando alguna acción o recibiendo un golpe
 func is_action_busy() -> bool:
-	if is_attacking or is_dashing or is_using_skill:
+	if is_attacking or is_dashing or is_using_skill or is_hit:
 		return true
 	for comp in componentes_mecanicas:
 		if comp.esta_activa():
@@ -166,17 +167,14 @@ func _physics_process(delta: float) -> void:
 		return
 
 	# --- 3. DETECCIÓN DE ENTRADA Y ACTIVACIÓN DE MECÁNICAS ---
+	for comp in componentes_mecanicas:
+		if not comp.action_name.is_empty() and is_action_just_pressed_safe(comp.action_name):
+			comp.ejecutar_mecanica()
+	
+	# Verificación de fallback para acción alternativa de definitiva ("definitiva" / "habilidad_2")
 	if not is_action_busy():
-		for comp in componentes_mecanicas:
-			if not comp.action_name.is_empty() and is_action_just_pressed_safe(comp.action_name):
-				comp.ejecutar_mecanica()
-				if is_action_busy():
-					break
-		
-		# Verificación de fallback para acción alternativa de definitiva ("definitiva" / "habilidad_2")
-		if not is_action_busy():
-			if is_action_just_pressed_safe("definitiva") or is_action_just_pressed_safe("habilidad_2"):
-				start_ultimate()
+		if is_action_just_pressed_safe("definitiva") or is_action_just_pressed_safe("habilidad_2"):
+			start_ultimate()
 
 	# --- 4. ESTADO EN EL SUELO Y COYOTE TIME ---
 	if is_on_floor():
@@ -263,6 +261,14 @@ func start_ultimate() -> void:
 			comp.ejecutar_mecanica()
 			return
 
+## Método para activar la animación 'hit' cuando el personaje sea golpeado
+func recibir_hit(_danio: float = 0.0) -> void:
+	is_hit = true
+	is_attacking = false
+	is_dashing = false
+	is_using_skill = false
+	play_action_anim("hit")
+
 func _buscar_componente_por_tipo(tipo: Variant) -> MecanicaBase:
 	for comp in componentes_mecanicas:
 		if is_instance_of(comp, tipo):
@@ -289,10 +295,11 @@ func _on_action_anim_completed() -> void:
 	if not animated_sprite:
 		return
 	var current_anim = animated_sprite.animation
-	if current_anim in ["ataquebasico", "ataquebasico1", "ataquebasico2", "habilidad1", "habilidad2", "definitiva", "ult", "habilidad_definitiva", "dash"] or current_anim.begins_with("ataquebasico"):
+	if current_anim in ["ataquebasico", "ataquebasico1", "ataquebasico2", "habilidad1", "habilidad2", "definitiva", "ult", "habilidad_definitiva", "dash", "hit"] or current_anim.begins_with("ataquebasico"):
 		is_attacking = false
 		is_using_skill = false
 		is_dashing = false
+		is_hit = false
 		for comp in componentes_mecanicas:
 			if comp.has_method("finalizar_dash") and comp.esta_activa():
 				comp.call("finalizar_dash")
@@ -306,18 +313,39 @@ func _on_action_anim_completed() -> void:
 func play_action_anim(anim_name: String) -> float:
 	if not animated_sprite or not animated_sprite.sprite_frames:
 		return 0.3
-	if not animated_sprite.sprite_frames.has_animation(anim_name):
-		return 0.3
+		
+	var target_anim = anim_name
+	if not animated_sprite.sprite_frames.has_animation(target_anim):
+		match target_anim:
+			"ataquebasico1", "ataquebasico2":
+				if animated_sprite.sprite_frames.has_animation("ataquebasico"):
+					target_anim = "ataquebasico"
+			"fall":
+				if animated_sprite.sprite_frames.has_animation("jump"):
+					target_anim = "jump"
+			"walk":
+				if animated_sprite.sprite_frames.has_animation("run"):
+					target_anim = "run"
+			"habilidad1":
+				if animated_sprite.sprite_frames.has_animation("definitiva"):
+					target_anim = "definitiva"
+			"hit":
+				if animated_sprite.sprite_frames.has_animation("idle"):
+					target_anim = "idle"
+					
+		if not animated_sprite.sprite_frames.has_animation(target_anim):
+			return 0.3
 	
-	var frame_count := animated_sprite.sprite_frames.get_frame_count(anim_name)
+	var frame_count := animated_sprite.sprite_frames.get_frame_count(target_anim)
 	if frame_count <= 0:
 		return 0.3
 		
-	var speed := animated_sprite.sprite_frames.get_animation_speed(anim_name)
+	var speed := animated_sprite.sprite_frames.get_animation_speed(target_anim)
 	if speed <= 0.0:
 		speed = 10.0
 		
-	animated_sprite.play(anim_name)
+	animated_sprite.play(target_anim)
+	animated_sprite.set_frame_and_progress(0, 0.0)
 	return float(frame_count) / speed
 
 func get_acceleration() -> float:
@@ -339,11 +367,12 @@ func update_animations(direction: float) -> void:
 					play_anim_if_exists("dublejump")
 		else:
 			if not play_anim_if_exists("fall"):
-				pass
+				if not play_anim_if_exists("jump"):
+					play_anim_if_exists("dublejump")
 	else:
 		if direction != 0.0:
-			if not play_anim_if_exists("run"):
-				play_anim_if_exists("walk")
+			if not play_anim_if_exists("walk"):
+				play_anim_if_exists("run")
 		else:
 			play_anim_if_exists("idle")
 

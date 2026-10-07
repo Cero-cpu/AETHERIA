@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://d3h8lx6qcgg3r" path="res://scenasBASE/niveles_Base(scenas)/pruebas/tile/caja.png" id="8_0aa1x"]
 [ext_resource type="Texture2D" uid="uid://c8w83qa1qdsrv" path="res://scenasBASE/niveles_Base(scenas)/pruebas/tile/columna.png" id="8_ywk1h"]
 [ext_resource type="Texture2D" uid="uid://c3bsmcvhcaetr" path="res://scenasBASE/niveles_Base(scenas)/pruebas/tile/barril.png" id="10_0aa1x"]
+[ext_resource type="PackedScene" uid="uid://dge1kkuqn7q8" path="res://personajes_scenes/POR REINOS/Lumenar/LumenarNPCS/smarka.tscn" id="11_6jpji"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a2jf7"]
 texture = ExtResource("2_7r117")
@@ -2212,8 +2213,9 @@ position = Vector2(870, 575)
 scale = Vector2(3.403226, 3.625)
 texture = ExtResource("10_0aa1x")
 
-[node name="SistemaBotonesMobiles" parent="UI" parent_id_path=PackedInt32Array(1982736451) index="0" unique_id=637211708]
-visible = false
+[node name="Node2D" parent="NPCS" parent_id_path=PackedInt32Array(100156684) index="0" unique_id=1035675120 instance=ExtResource("11_6jpji")]
+z_index = -1
+position = Vector2(935, 573)
 
 [node name="Area2D" type="Area2D" parent="transaccion" parent_id_path=PackedInt32Array(217721086) index="0" unique_id=1815783668]
 script = ExtResource("7_mdhj8")

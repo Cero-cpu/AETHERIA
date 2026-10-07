@@ -18,11 +18,6 @@ const ProyectilVesperaScene = preload("res://personajes_scenes/POR REINOS/Lumena
 # Tiempos sincronizados para cada ataque individual
 @export var delay_disparo_1: float = 0.10 # Delay para la bola de basico 1
 @export var delay_disparo_2: float = 0.10 # Delay para la bola de basico 2
-@export var tiempo_reset_combo: float = 1.0 # Tiempo sin atacar para reiniciar combo a basico 1
-
-var paso_combo: int = 1 # 1: basico 1 ("ataquebasico1"), 2: basico 2 ("ataquebasico2")
-var timer_reset: float = 0.0
-var combo_buffered: bool = false
 
 func puede_ejecutar() -> bool:
 	if is_attacking:
@@ -112,5 +107,3 @@ func _instanciar_proyectil() -> void:
 	var parent_node = personaje.get_parent()
 	if parent_node:
 		parent_node.add_child(proyectil)
-
-

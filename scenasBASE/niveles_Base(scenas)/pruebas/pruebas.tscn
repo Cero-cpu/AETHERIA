@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bsa5x62lr1ieb"]
 
 [ext_resource type="PackedScene" uid="uid://cyub4fq62c4vy" path="res://scenasBASE/niveles_Base(scenas)/Nivel_Base.tscn" id="1_3h57l"]
-[ext_resource type="PackedScene" uid="uid://dwdf0lnt3stj1" path="res://personajes_scenes/POR REINOS/Lumenar/raija/raija.tscn" id="2_2d3g4"]
+[ext_resource type="PackedScene" uid="uid://cxk0mpultctcf" path="res://personajes_scenes/POR REINOS/Lumenar/vespera/vespera.tscn" id="2_whnro"]
 [ext_resource type="Script" uid="uid://cdknu7rm2ak8h" path="res://sistemas/scene_transition/spawn_point.gd" id="3_whnro"]
 [ext_resource type="Texture2D" uid="uid://bj5oous72by6v" path="res://scenasBASE/niveles_Base(scenas)/pruebas/tile/spr_torch.png" id="4_xy7ue"]
 [ext_resource type="Texture2D" uid="uid://dvba4jlgj51lq" path="res://scenasBASE/niveles_Base(scenas)/pruebas/tile/Tilesetv3.png" id="5_2d3g4"]
@@ -3563,11 +3563,11 @@ texture_filter = 1
 [node name="Personaje" parent="." index="0" unique_id=1356722181]
 position = Vector2(1, 0)
 
-[node name="CharacterBody2D" parent="Personaje" index="0" unique_id=1040658430 instance=ExtResource("2_2d3g4")]
-position = Vector2(68, 758)
+[node name="CharacterBody2D" parent="Personaje" index="0" unique_id=1040658430 instance=ExtResource("2_whnro")]
+position = Vector2(288, 753)
 
 [node name="Marker2D" parent="Personaje" index="1" unique_id=1185579152]
-position = Vector2(1795, 764)
+position = Vector2(1856, 764)
 script = ExtResource("3_whnro")
 door_id = "prueba_xdw_reversa"
 
