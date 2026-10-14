@@ -1,0 +1,51 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://personajes_scenes/POR REINOS/Lumenar/Enemigos/imp_magicos/proyectil_imp.gd" id="1_script"]
+[ext_resource type="Shader" path="res://personajes_scenes/POR REINOS/Lumenar/Enemigos/imp_magicos/proyectil_imp.gdshader" id="2_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_orb"]
+shader = ExtResource("2_shader")
+shader_parameter/velocidad = 4.0
+shader_parameter/radio = 0.45
+shader_parameter/color_nucleo = Color(1, 1, 0.95, 1)
+shader_parameter/color_aura = Color(0.2, 0.85, 1, 1)
+shader_parameter/color_borde = Color(0.1, 0.25, 0.9, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_col"]
+radius = 7.0
+
+[sub_resource type="Curve" id="Curve_trail"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.2, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_trail"]
+colors = PackedColorArray(0.3, 0.9, 1, 0.9, 0.1, 0.3, 0.9, 0)
+
+[node name="ProyectilImp" type="Area2D"]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_col")
+
+[node name="SpriteOrbe" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_orb")
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+color = Color(1, 1, 1, 1)
+
+[node name="Particulas" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 0.35
+emission_shape = 1
+emission_sphere_radius = 4.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+scale_amount_min = 2.0
+scale_amount_max = 3.5
+scale_amount_curve = SubResource("Curve_trail")
+color_ramp = SubResource("Gradient_trail")

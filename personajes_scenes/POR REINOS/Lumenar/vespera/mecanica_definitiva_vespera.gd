@@ -14,10 +14,10 @@ const ShaderNoche = preload("res://personajes_scenes/POR REINOS/Lumenar/vespera/
 const ShaderAtaqueDual = preload("res://personajes_scenes/POR REINOS/Lumenar/vespera/ataque_definitiva_vespera.gdshader")
 
 @export_category("Configuración Aura Definitiva Vespera")
-@export var intensidad_maxima: float = 3.2
-@export var grosor_aura_maximo: float = 6.0
-@export var destellos_maximos: float = 3.5
-@export var intervalo_estela_fantasma: float = 0.06
+@export var intensidad_maxima: float = 2.2
+@export var grosor_aura_maximo: float = 4.0
+@export var destellos_maximos: float = 1.5
+@export var intervalo_estela_fantasma: float = 0.12
 
 @export_category("Configuración Levitación y Ascenso")
 @export var elevar_personaje: bool = true
@@ -25,7 +25,7 @@ const ShaderAtaqueDual = preload("res://personajes_scenes/POR REINOS/Lumenar/ves
 @export var duracion_elevacion: float = 1.38 # Ascenso gradual y continuo a 8.0 fps (~frame 11)
 
 @export_category("Configuración Dominio de la Noche")
-@export var intensidad_oscuridad_noche: float = 0.88
+@export var intensidad_oscuridad_noche: float = 0.72
 
 @export_category("Configuración Daño e Impacto Dual")
 @export var dano_definitiva: float = 60.0
@@ -56,8 +56,8 @@ func _ready() -> void:
 	material_definitiva = ShaderMaterial.new()
 	material_definitiva.shader = ShaderDefinitiva
 	material_definitiva.set_shader_parameter("activo", 0.0)
-	material_definitiva.set_shader_parameter("intensidad", 1.5)
-	material_definitiva.set_shader_parameter("velocidad", 3.8)
+	material_definitiva.set_shader_parameter("intensidad", 1.2)
+	material_definitiva.set_shader_parameter("velocidad", 2.5)
 	material_definitiva.set_shader_parameter("grosor_aura", 3.0)
 	material_definitiva.set_shader_parameter("color_nucleo", Color(0.98, 0.88, 1.0, 1.0))
 	material_definitiva.set_shader_parameter("color_intenso", Color(0.78, 0.12, 1.0, 1.0))
@@ -306,14 +306,14 @@ func _generar_eco_arcano(progreso: float) -> void:
 
 	var eco = Sprite2D.new()
 	eco.texture = tex
-	eco.global_position = sprite.global_position + Vector2(randf_range(-4.0, 4.0), randf_range(-6.0, 2.0))
+	eco.global_position = sprite.global_position + Vector2(randf_range(-2.0, 2.0), randf_range(-3.0, 1.0))
 	eco.global_rotation = sprite.global_rotation
-	eco.global_scale = sprite.global_scale * (1.0 + progreso * 0.15)
+	eco.global_scale = sprite.global_scale * (1.0 + progreso * 0.05)
 	eco.flip_h = sprite.flip_h
 	eco.flip_v = sprite.flip_v
 	eco.offset = sprite.offset
 	eco.centered = sprite.centered
-	eco.modulate = Color(0.85, 0.2, 1.0, 0.65)
+	eco.modulate = Color(0.6, 0.15, 0.9, 0.4)
 
 	var parent = personaje.get_parent()
 	if parent:
@@ -322,7 +322,6 @@ func _generar_eco_arcano(progreso: float) -> void:
 		personaje.add_child(eco)
 
 	var tween = eco.create_tween().set_parallel(true)
-	tween.tween_property(eco, "modulate:a", 0.0, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property(eco, "position:y", eco.position.y - 12.0, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property(eco, "scale", eco.scale * 1.12, 0.3)
+	tween.tween_property(eco, "modulate:a", 0.0, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(eco, "position:y", eco.position.y - 6.0, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.finished.connect(eco.queue_free)

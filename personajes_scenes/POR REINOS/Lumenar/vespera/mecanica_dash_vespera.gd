@@ -9,7 +9,7 @@ var material_dash: ShaderMaterial
 var material_original: Material = null
 
 var timer_fantasma: float = 0.0
-@export var intervalo_fantasma: float = 0.045
+@export var intervalo_fantasma: float = 0.08
 
 func _ready() -> void:
 	super._ready()
@@ -80,8 +80,8 @@ func _crear_fantasma() -> void:
 	# Aplicar shader de fantasma arcano morado
 	var mat_fantasma = ShaderMaterial.new()
 	mat_fantasma.shader = ShaderFantasma
-	mat_fantasma.set_shader_parameter("color_fantasma", Color(0.7, 0.15, 1.0, 0.8))
-	mat_fantasma.set_shader_parameter("alpha_base", 0.6)
+	mat_fantasma.set_shader_parameter("color_fantasma", Color(0.5, 0.05, 0.85, 0.6))
+	mat_fantasma.set_shader_parameter("alpha_base", 0.3)
 	fantasma.material = mat_fantasma
 	
 	# Añadir al padre del personaje (escena actual) para que quede estático mientras Vespera avanza
@@ -92,7 +92,6 @@ func _crear_fantasma() -> void:
 		personaje.add_child(fantasma)
 		
 	# Tween para desvanecer y destruir el fantasma
-	var tween = fantasma.create_tween().set_parallel(true)
-	tween.tween_property(fantasma, "modulate:a", 0.0, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property(fantasma, "scale", fantasma.scale * 1.1, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	var tween = fantasma.create_tween()
+	tween.tween_property(fantasma, "modulate:a", 0.0, 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.finished.connect(fantasma.queue_free)

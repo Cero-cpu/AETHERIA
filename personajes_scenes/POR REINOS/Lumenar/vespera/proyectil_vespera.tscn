@@ -77,13 +77,13 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shader"]
 shader = ExtResource("3_shader")
-shader_parameter/velocidad = 2.5
-shader_parameter/intensidad = 1.8
-shader_parameter/radio_bola = 0.62
-shader_parameter/color_nucleo = Color(1, 0.92, 1, 1)
-shader_parameter/color_medio = Color(0.78, 0.08, 1, 1)
-shader_parameter/color_llama = Color(0.38, 0, 0.85, 1)
-shader_parameter/color_borde = Color(0.14, 0, 0.42, 1)
+shader_parameter/velocidad = 2.0
+shader_parameter/intensidad = 1.2
+shader_parameter/radio_bola = 0.55
+shader_parameter/color_nucleo = Color(0.95, 0.88, 1, 1)
+shader_parameter/color_medio = Color(0.65, 0.1, 0.9, 1)
+shader_parameter/color_llama = Color(0.35, 0, 0.75, 1)
+shader_parameter/color_borde = Color(0.12, 0, 0.35, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_proyectil"]
 radius = 4.0

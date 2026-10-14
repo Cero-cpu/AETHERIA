@@ -6,7 +6,7 @@ signal secuencia_terminada
 
 @export_category("Configuración de Transición")
 ## Escena a la que transicionará al terminar (ej. la primera capa del mundo).
-@export_file("*.tscn") var ruta_siguiente_escena: String = "res://scenasBASE/niveles_Base(scenas)/pruebas/pruebas.tscn"
+@export_file("*.tscn") var ruta_siguiente_escena: String = "res://scenasBASE/niveles_Base(scenas)/nivel1_inicio_de_la_historia/scena1.tscn"
 
 @export_category("Tiempos de Animación")
 @export var tiempo_aparicion: float = 2.0

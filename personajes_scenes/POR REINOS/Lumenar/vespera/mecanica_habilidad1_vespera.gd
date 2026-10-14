@@ -5,7 +5,8 @@ extends MecanicaHabilidad
 # MECÁNICA DE HABILIDAD 1 (CHASQUIDO TEMPORAL) - VESPERA
 # Ejecuta la animación "habilidad1" (chasquido de dedos) y despliega una
 # onda de distorsión y parálisis del tiempo con desaturación cromática y
-# resplandor arcano. Paraliza (stun) a todos los enemigos dentro del rango.
+# resplandor arcano. Paraliza (stun) a todos los enemigos dentro del rango
+# y congela todos los proyectiles enemigos en el aire.
 # ==============================================================================
 
 const ShaderParalisisScript = preload("res://personajes_scenes/POR REINOS/Lumenar/vespera/paralisis_tiempo_vespera.gdshader")
@@ -23,6 +24,9 @@ var overlay_canvas: CanvasLayer = null
 var color_rect_efecto: ColorRect = null
 var material_shader: ShaderMaterial = null
 var tween_efecto: Tween = null
+
+# Lista de proyectiles actualmente congelados para limpiarlos si es necesario
+var _proyectiles_congelados: Array = []
 
 func ejecutar_mecanica() -> void:
 	if not puede_ejecutar():
@@ -56,6 +60,7 @@ func _activar_chasquido_temporal() -> void:
 	_crear_overlay_pantalla()
 	_animar_efecto_temporal()
 	_aplicar_stun_enemigos_en_rango()
+	_congelar_proyectiles_en_rango()
 
 func _aplicar_stun_enemigos_en_rango() -> void:
 	if not is_instance_valid(personaje):
@@ -77,6 +82,128 @@ func _aplicar_stun_enemigos_en_rango() -> void:
 		if dist_sq <= rango_sq:
 			if enemigo.has_method("aplicar_stun"):
 				enemigo.aplicar_stun(duracion_stun)
+
+# ==============================================================================
+# CONGELAMIENTO DE PROYECTILES ENEMIGOS
+# Busca proyectiles en el grupo "proyectiles_enemigos" dentro del radio de stun.
+# Los congela desactivando _physics_process y aplicando un tinte visual.
+# Después de duracion_stun los descongela o destruye si ya no son válidos.
+# También detecta genéricamente cualquier Area2D con "direccion" y "velocidad"
+# que no pertenezca al jugador.
+# ==============================================================================
+
+func _congelar_proyectiles_en_rango() -> void:
+	if not is_instance_valid(personaje):
+		return
+
+	var tree = personaje.get_tree()
+	if not tree:
+		return
+
+	var pos_centro = personaje.global_position
+	var rango_sq = radio_stun * radio_stun
+
+	# Buscar por grupo "proyectiles_enemigos"
+	var proyectiles = tree.get_nodes_in_group("proyectiles_enemigos")
+	
+	# También buscar genéricamente nodos que tengan "direccion" y "velocidad"
+	# y que no sean del jugador (para soportar futuros enemigos sin grupo)
+	var proyectiles_genericos = tree.get_nodes_in_group("proyectiles")
+	for p in proyectiles_genericos:
+		if p not in proyectiles:
+			proyectiles.append(p)
+
+	for proyectil in proyectiles:
+		if not is_instance_valid(proyectil):
+			continue
+		# No congelar proyectiles propios del jugador
+		if proyectil.is_in_group("jugador") or proyectil is ProyectilVespera:
+			continue
+		if proyectil.owner is PersonajeBase:
+			continue
+
+		var dist_sq = pos_centro.distance_squared_to(proyectil.global_position)
+		if dist_sq <= rango_sq:
+			_congelar_proyectil(proyectil)
+
+	# Programar descongelamiento
+	if _proyectiles_congelados.size() > 0:
+		var timer_desc = tree.create_timer(duracion_stun)
+		timer_desc.timeout.connect(_descongelar_todos_proyectiles)
+
+func _congelar_proyectil(proyectil: Node) -> void:
+	if not is_instance_valid(proyectil):
+		return
+	# Evitar congelar dos veces
+	if proyectil in _proyectiles_congelados:
+		return
+
+	# Pausar el procesamiento de físicas (detiene el movimiento)
+	proyectil.set_physics_process(false)
+	
+	# Desactivar las colisiones temporalmente para que no dañe mientras está congelado
+	if proyectil is Area2D:
+		proyectil.set_deferred("monitoring", false)
+
+	# Efecto visual: tinte violeta-azulado de "congelado en el tiempo"
+	if "modulate" in proyectil:
+		proyectil.set_meta("_modulate_pre_congelar", proyectil.modulate)
+		proyectil.modulate = Color(0.6, 0.5, 1.0, 0.85)
+
+	# Si tiene un AnimatedSprite2D, pausarlo
+	var anim_sprite = proyectil.get_node_or_null("AnimatedSprite2D")
+	if anim_sprite and anim_sprite is AnimatedSprite2D:
+		anim_sprite.pause()
+	
+	# Si tiene un SpriteOrbe u otro nodo visual, tintarlo también
+	var sprite_orbe = proyectil.get_node_or_null("SpriteOrbe")
+	if sprite_orbe and "modulate" in sprite_orbe:
+		sprite_orbe.set_meta("_modulate_pre_congelar", sprite_orbe.modulate)
+		sprite_orbe.modulate = Color(0.6, 0.5, 1.0, 0.85)
+
+	# Pausar partículas si las tiene
+	var particulas = proyectil.get_node_or_null("Particulas")
+	if particulas and particulas is CPUParticles2D:
+		particulas.emitting = false
+
+	_proyectiles_congelados.append(proyectil)
+
+func _descongelar_todos_proyectiles() -> void:
+	for proyectil in _proyectiles_congelados:
+		_descongelar_proyectil(proyectil)
+	_proyectiles_congelados.clear()
+
+func _descongelar_proyectil(proyectil: Node) -> void:
+	if not is_instance_valid(proyectil):
+		return
+
+	# Reactivar físicas
+	proyectil.set_physics_process(true)
+	
+	# Reactivar colisiones
+	if proyectil is Area2D:
+		proyectil.set_deferred("monitoring", true)
+
+	# Restaurar modulate original
+	if "modulate" in proyectil and proyectil.has_meta("_modulate_pre_congelar"):
+		proyectil.modulate = proyectil.get_meta("_modulate_pre_congelar")
+		proyectil.remove_meta("_modulate_pre_congelar")
+	
+	# Reanudar AnimatedSprite2D
+	var anim_sprite = proyectil.get_node_or_null("AnimatedSprite2D")
+	if anim_sprite and anim_sprite is AnimatedSprite2D:
+		anim_sprite.play()
+	
+	# Restaurar SpriteOrbe
+	var sprite_orbe = proyectil.get_node_or_null("SpriteOrbe")
+	if sprite_orbe and "modulate" in sprite_orbe and sprite_orbe.has_meta("_modulate_pre_congelar"):
+		sprite_orbe.modulate = sprite_orbe.get_meta("_modulate_pre_congelar")
+		sprite_orbe.remove_meta("_modulate_pre_congelar")
+
+	# Reactivar partículas
+	var particulas = proyectil.get_node_or_null("Particulas")
+	if particulas and particulas is CPUParticles2D:
+		particulas.emitting = true
 
 func _crear_overlay_pantalla() -> void:
 	# Limpiar overlay anterior si existiera
@@ -115,7 +242,7 @@ func _crear_overlay_pantalla() -> void:
 	material_shader.set_shader_parameter("centro_pantalla", centro_uv)
 	material_shader.set_shader_parameter("progreso", 0.0)
 	material_shader.set_shader_parameter("desaturacion", desaturacion_tiempo)
-	material_shader.set_shader_parameter("brillo_relampago", 1.2)
+	material_shader.set_shader_parameter("brillo_relampago", 0.6)
 	
 	color_rect_efecto.material = material_shader
 	overlay_canvas.add_child(color_rect_efecto)
@@ -157,4 +284,5 @@ func finalizar_habilidad() -> void:
 
 func _exit_tree() -> void:
 	_limpiar_overlay()
-
+	# Asegurarnos de descongelar proyectiles si Vespera sale de la escena
+	_descongelar_todos_proyectiles()

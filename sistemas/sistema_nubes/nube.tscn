@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://sistemas/sistema_nubes/nube.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://sistemas/sistema_nubes/sprites/nube_1.png" id="2_texture"]
+
+[node name="Nube" type="Sprite2D"]
+texture = ExtResource("2_texture")
+script = ExtResource("1_script")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-75, -30, 150, 60)
