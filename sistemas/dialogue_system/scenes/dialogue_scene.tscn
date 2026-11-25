@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dxkt3ttny13lu"]
 
 [ext_resource type="Script" uid="uid://dp8agc7mjehaq" path="res://sistemas/dialogue_system/scripts/dialogue_box.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://chtbqqnaiw5u3" path="res://sistemas/dialogue_system/sounds/undertale_voice.wav" id="2_voice"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_slot1"]
 animations = [{
@@ -323,3 +324,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_skip_normal")
 theme_override_styles/hover = SubResource("StyleBoxFlat_skip_hover")
 theme_override_styles/focus = SubResource("StyleBoxFlat_skip_normal")
 text = "Saltar  ▶▶"
+
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="." unique_id=987654321]
+stream = ExtResource("2_voice")
+volume_db = -4.0
+bus = &"Master"

@@ -2,13 +2,53 @@
   "characters": {
 	"ignia": {
 	  "display_name": "Ignia",
-	  "name_color": "#FF8B35"
+	  "name_color": "#FF8B35",
+	  "voice_pitch": 1.05
+	},
+	"Ignia": {
+	  "display_name": "Ignia",
+	  "name_color": "#FF8B35",
+	  "voice_pitch": 1.05
 	},
 	"Vespera": {
 	  "display_name": "Vespera",
-	  "name_color": "#9B6FD4"
-
+	  "name_color": "#9B6FD4",
+	  "voice_pitch": 0.9
+	},
+	"vespera": {
+	  "display_name": "Vespera",
+	  "name_color": "#9B6FD4",
+	  "voice_pitch": 0.9
+	},
+	"kaelen": {
+	  "display_name": "Kaelen",
+	  "name_color": "#C85A74",
+	  "voice_pitch": 1.0
+	},
+	"Kaelen": {
+	  "display_name": "Kaelen",
+	  "name_color": "#C85A74",
+	  "voice_pitch": 1.0
+	},
+	"nix": {
+	  "display_name": "Nix",
+	  "name_color": "#78B5E8",
+	  "voice_pitch": 0.85
+	},
+	"Nix": {
+	  "display_name": "Nix",
+	  "name_color": "#78B5E8",
+	  "voice_pitch": 0.85
+	},
+	"shama": {
+	  "display_name": "Shama",
+	  "name_color": "#2979FF",
+	  "voice_pitch": 1.2
+	},
+	"Shama": {
+	  "display_name": "Shama",
+	  "name_color": "#2979FF",
+	  "voice_pitch": 1.2
 	}
-
   }
 }

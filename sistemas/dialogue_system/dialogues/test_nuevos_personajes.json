@@ -1,0 +1,47 @@
+{
+	"scene_characters": [
+		{
+			"id": "shama",
+			"slot": 1
+		},
+		{
+			"id": "kaelen",
+			"slot": 2
+		},
+		{
+			"id": "nix",
+			"slot": 3
+		},
+		{
+			"id": "ignia",
+			"slot": 4
+		}
+	],
+	"lines": [
+		{
+			"speaker_id": "shama",
+			"expression": "emocionada",
+			"text": "¡Por fin estamos todos reunidos! ¿Están listos para la misión?"
+		},
+		{
+			"speaker_id": "kaelen",
+			"expression": "sonriente",
+			"text": "Nací lista, Shama. Ningún desafío nos detendrá hoy."
+		},
+		{
+			"speaker_id": "nix",
+			"expression": "seria",
+			"text": "Mantengan la calma. No bajen la guardia antes de comenzar."
+		},
+		{
+			"speaker_id": "ignia",
+			"expression": "confiada",
+			"text": "Tranquila Nix, con mi fuego y tu hielo nadie se nos va a acercar."
+		},
+		{
+			"speaker_id": "shama",
+			"expression": "guino",
+			"text": "¡Ese es el espíritu! ¡En marcha!"
+		}
+	]
+}

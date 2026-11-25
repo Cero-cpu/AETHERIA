@@ -48,6 +48,8 @@ func ejecutar_mecanica() -> void:
 
 	if personaje:
 		personaje.is_attacking = true
+		if personaje.has_method("reproducir_sonido_ataque"):
+			personaje.reproducir_sonido_ataque()
 		action_timer = personaje.play_action_anim(anim_actual)
 
 		# Avanzar el paso de combo para el próximo clic

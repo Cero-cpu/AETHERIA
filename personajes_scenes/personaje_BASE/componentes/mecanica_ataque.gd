@@ -37,6 +37,8 @@ func ejecutar_mecanica() -> void:
 
 	if personaje:
 		personaje.is_attacking = true
+		if personaje.has_method("reproducir_sonido_ataque"):
+			personaje.reproducir_sonido_ataque()
 		var anim_a_reproducir = anim_name if paso_combo == 1 else anim_combo
 		if personaje.animated_sprite and personaje.animated_sprite.sprite_frames:
 			if not personaje.animated_sprite.sprite_frames.has_animation(anim_a_reproducir):

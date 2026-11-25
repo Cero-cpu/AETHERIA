@@ -35,6 +35,8 @@ func ejecutar_mecanica() -> void:
 	is_using_skill = true
 	if personaje:
 		personaje.is_using_skill = true
+		if personaje.has_method("reproducir_sonido_habilidad"):
+			personaje.reproducir_sonido_habilidad()
 		var anim = _determinar_animacion()
 		action_timer = personaje.play_action_anim(anim)
 		

@@ -26,6 +26,12 @@ func ejecutar_mecanica() -> void:
 	is_using_skill = true
 	if personaje:
 		personaje.is_using_skill = true
+		if action_name == "habilidad_definitiva" or anim_name in ["definitiva", "ult", "habilidad_definitiva"] or name == "MecanicaDefinitiva":
+			if personaje.has_method("reproducir_sonido_definitiva"):
+				personaje.reproducir_sonido_definitiva()
+		else:
+			if personaje.has_method("reproducir_sonido_habilidad"):
+				personaje.reproducir_sonido_habilidad()
 		var anim_to_play = _determinar_animacion()
 		action_timer = personaje.play_action_anim(anim_to_play)
 

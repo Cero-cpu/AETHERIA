@@ -36,9 +36,18 @@ signal skip_pressed
 # — Botón saltar (esquina sup-der)
 @onready var _skip_btn: Button = $DialogueScene/DialogueBox/SkipButton
 
+# — Reproductor de voz de diálogo (estilo Undertale)
+@onready var _voice_player: AudioStreamPlayer = $VoicePlayer
+
 # Slots de personaje de fondo — se llenan en _ready() según SLOT_COUNT
 var _slot_nodes:   Array[Control]          = []
 var _sprite_nodes: Array[AnimatedSprite2D] = []
+
+# Estado de voz estilo Undertale
+var _current_pitch_base: float = 1.0
+var _voice_char_interval: int = 1
+var _chars_since_last_sound: int = 0
+var _parsed_text: String = ""
 
 # ══════════════════════════════════════════════════════════════════
 #  CONSTANTES
@@ -152,19 +161,24 @@ func show_line(line_data: Dictionary) -> void:
 	# — Retrato en el cuadrito izquierdo
 	update_portrait(portrait, expression)
 
+	# — Configurar tono de voz y parámetros para esta línea
+	_current_pitch_base = float(line_data.get("voice_pitch", 1.0))
+
 	# — Resaltar personaje activo en los slots de fondo
 	_update_speaker_highlight(speaker_slot)
 
-	# — Iniciar efecto de escritura
+	# — Iniciar efecto de escritura con sonido
 	_start_typewriter(text)
 
-## Salta el typewriter: muestra todo el texto inmediatamente.
+## Salta el typewriter: muestra todo el texto inmediatamente y detiene el sonido.
 func skip_typewriter() -> void:
 	if not is_typing:
 		return
 	is_typing = false
 	_dlg_text.visible_characters = -1
 	_continue_ind.visible = true
+	if _voice_player and _voice_player.playing:
+		_voice_player.stop()
 
 ## Oculta todo y limpia el estado.
 func hide_dialogue() -> void:
@@ -173,11 +187,13 @@ func hide_dialogue() -> void:
 	_dlg_text.text = ""
 	_name_label.text = ""
 	_portrait_sprite.visible = false
+	if _voice_player and _voice_player.playing:
+		_voice_player.stop()
 	for i in range(SLOT_COUNT):
 		_slot_nodes[i].visible = false
 
 # ══════════════════════════════════════════════════════════════════
-#  TYPEWRITER (usa visible_characters para respetar BBCode)
+#  TYPEWRITER (usa visible_characters para respetar BBCode) + VOZ UNDERTALE
 # ══════════════════════════════════════════════════════════════════
 func _start_typewriter(text: String) -> void:
 	_dlg_text.text = text
@@ -185,13 +201,30 @@ func _start_typewriter(text: String) -> void:
 	_continue_ind.visible = false
 	is_typing = true
 	_typing_timer = 0.0
+	_chars_since_last_sound = 0
+	_parsed_text = _dlg_text.get_parsed_text()
 
 func _process(delta: float) -> void:
 	if is_typing:
 		_typing_timer += delta
 		var total := _dlg_text.get_total_character_count()
 		var show_count := int(_typing_timer / TYPING_SPEED)
-		_dlg_text.visible_characters = min(show_count, total)
+		var prev_visible := _dlg_text.visible_characters
+		var new_visible: int = min(show_count, total)
+		_dlg_text.visible_characters = new_visible
+
+		# Reproducir sonido tipo Undertale al revelar letras
+		if new_visible > prev_visible:
+			for i in range(prev_visible, new_visible):
+				if i < _parsed_text.length():
+					var c := _parsed_text[i]
+					# Omitir espacios y saltos de línea
+					if c != " " and c != "\n" and c != "\t":
+						_chars_since_last_sound += 1
+						if _chars_since_last_sound >= _voice_char_interval:
+							_chars_since_last_sound = 0
+							_play_voice_sound()
+							break
 
 		if _dlg_text.visible_characters >= total:
 			is_typing = false
@@ -201,6 +234,13 @@ func _process(delta: float) -> void:
 	# Parpadeo sinusoidal del indicador ▼
 	if _continue_ind.visible:
 		_continue_ind.modulate.a = 0.55 + 0.45 * sin(Time.get_ticks_msec() * BLINK_SPEED)
+
+func _play_voice_sound() -> void:
+	if not _voice_player or not _voice_player.stream:
+		return
+	# Sutil variación de tono (jitter orgánico estilo Undertale)
+	_voice_player.pitch_scale = _current_pitch_base * randf_range(0.96, 1.04)
+	_voice_player.play()
 
 # ══════════════════════════════════════════════════════════════════
 #  RESALTADO DE PERSONAJE ACTIVO (slots de fondo)
@@ -225,6 +265,12 @@ func _input(event: InputEvent) -> void:
 	if not visible:
 		return
 	if event is InputEventKey and event.is_action_pressed("ui_accept"):
+		continue_pressed.emit()
+		get_viewport().set_input_as_handled()
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		continue_pressed.emit()
+		get_viewport().set_input_as_handled()
+	elif event is InputEventScreenTouch and event.pressed:
 		continue_pressed.emit()
 		get_viewport().set_input_as_handled()
 

@@ -154,6 +154,7 @@ func _show_current_line() -> void:
 	var display_name: String  = char_data.get("display_name", speaker_id)
 	var name_color_hex: String = char_data.get("name_color", "#FFFFFF")
 	var name_color: Color = Color(name_color_hex)
+	var voice_pitch: float = float(char_data.get("voice_pitch", 1.0))
 
 	# Enviar datos a la UI (incluye portrait_frames para el cuadro izquierdo)
 	_ui.show_line({
@@ -163,6 +164,7 @@ func _show_current_line() -> void:
 		"text":            text,
 		"portrait_frames": frames,
 		"expression":      expression,
+		"voice_pitch":     voice_pitch,
 	})
 
 	line_changed.emit(_index, _lines.size())
@@ -229,20 +231,25 @@ func _load_sprite_frames(character_id: String, expression: String) -> SpriteFram
 		return frames
 
 	# — OPCIÓN B: textura estática por expresión —
-	for ext in [".png", ".jpg", ".jpeg", ".webp"]:
-		var tex_path: String = _PORTRAITS_DIR + character_id + "/" + expression + String(ext)
-		if ResourceLoader.exists(tex_path):
-			var tex_key: String = tex_path + "::frames"
-			if _cache.has(tex_key):
-				return _cache[tex_key]
-			var tex: Texture2D = _get_cached(tex_path)
-			if tex:
-				var frames := SpriteFrames.new()
-				if not frames.has_animation("idle"):
-					frames.add_animation("idle")
-				frames.add_frame("idle", tex)
-				_cache[tex_key] = frames
-				return frames
+	var candidate_dirs: Array[String] = [character_id]
+	if character_id.to_lower() != character_id:
+		candidate_dirs.append(character_id.to_lower())
+
+	for c_dir in candidate_dirs:
+		for ext in [".png", ".jpg", ".jpeg", ".webp"]:
+			var tex_path: String = _PORTRAITS_DIR + c_dir + "/" + expression + String(ext)
+			if ResourceLoader.exists(tex_path):
+				var tex_key: String = tex_path + "::frames"
+				if _cache.has(tex_key):
+					return _cache[tex_key]
+				var tex: Texture2D = _get_cached(tex_path)
+				if tex:
+					var frames := SpriteFrames.new()
+					if not frames.has_animation("idle"):
+						frames.add_animation("idle")
+					frames.add_frame("idle", tex)
+					_cache[tex_key] = frames
+					return frames
 
 	# — FALLBACK: missing_expression —
 	printerr("DialogueManager ▸ Sin sprite para '", character_id, "' (expresión: '", expression, "'). Usando fallback.")

@@ -1,0 +1,127 @@
+{
+	"scene_characters": [
+		{
+			"id": "shama",
+			"slot": 1
+		},
+		{
+			"id": "kaelen",
+			"slot": 2
+		},
+		{
+			"id": "nix",
+			"slot": 3
+		},
+		{
+			"id": "ignia",
+			"slot": 4
+		}
+	],
+	"lines": [
+		{
+			"speaker_id": "shama",
+			"expression": "emocionada",
+			"text": "¡Por fin logramos reunirnos las cuatro! ¡La expedición a las ruinas arcanas comienza hoy!"
+		},
+		{
+			"speaker_id": "kaelen",
+			"expression": "sonriente",
+			"text": "He afilado mis hojas y preparado las provisiones. ¡Nadie nos va a detener esta vez!"
+		},
+		{
+			"speaker_id": "nix",
+			"expression": "seria",
+			"text": "Bojen el entusiasmo. Las anomalías mágicas en el cuadrante norte se han triplicado desde anoche."
+		},
+		{
+			"speaker_id": "nix",
+			"expression": "dudosa",
+			"text": "¿De verdad creen prudente cruzar sin explorar antes el perímetro?"
+		},
+		{
+			"speaker_id": "ignia",
+			"expression": "risa_burlona",
+			"text": "¡Jajaja! Ay Nix, tan precavida como siempre. ¿Tienes miedo de que se te congele la capa?"
+		},
+		{
+			"speaker_id": "ignia",
+			"expression": "confiada",
+			"text": "Si una bestia asoma la cabeza, la convierto en cenizas antes de que parpadee~"
+		},
+		{
+			"speaker_id": "nix",
+			"expression": "molesta",
+			"text": "Tu arrogancia va a hacer que nos embosquen a todas, Ignia."
+		},
+		{
+			"speaker_id": "ignia",
+			"expression": "guino",
+			"text": "Admite que te encanta mi estilo, copito de nieve."
+		},
+		{
+			"speaker_id": "kaelen",
+			"expression": "inquieta",
+			"text": "Chicas, por favor... todavía ni salimos del campamento y ya están discutiendo."
+		},
+		{
+			"speaker_id": "kaelen",
+			"expression": "nerviosa",
+			"text": "La última vez que pelearon así, quemaron la mitad del bosque y congelaron la otra mitad..."
+		},
+		{
+			"speaker_id": "shama",
+			"expression": "insegura",
+			"text": "¿Eso significa... que se va a cancelar el viaje?"
+		},
+		{
+			"speaker_id": "shama",
+			"expression": "triste",
+			"text": "Pero si practiqué toda la semana mis nuevos hechizos... [i]*snif*[/i]..."
+		},
+		{
+			"speaker_id": "ignia",
+			"expression": "sorprendida",
+			"text": "¡Espera, espera! ¡No llores Shama! No dije nada malo, ¡lo juro!"
+		},
+		{
+			"speaker_id": "ignia",
+			"expression": "avergonzada",
+			"text": "Solo estaba bromeando... no te pongas así..."
+		},
+		{
+			"speaker_id": "kaelen",
+			"expression": "enojada",
+			"text": "¡Ves lo que provocas, Ignia!"
+		},
+		{
+			"speaker_id": "nix",
+			"expression": "suspirando",
+			"text": "Ufff... siempre es igual con ustedes."
+		},
+		{
+			"speaker_id": "nix",
+			"expression": "sonriente",
+			"text": "Tranquila Shama, nadie va a cancelar nada. Yo misma cubriré la retaguardia de tu avance."
+		},
+		{
+			"speaker_id": "shama",
+			"expression": "emocionada",
+			"text": "¡¿De verdad, Nix?! ¡Eres la mejor de todas!"
+		},
+		{
+			"speaker_id": "shama",
+			"expression": "guino",
+			"text": "¡Prometo dar lo mejor de mí! ¡Nadie podrá con nuestro equipo!"
+		},
+		{
+			"speaker_id": "kaelen",
+			"expression": "riendo",
+			"text": "¡Jajaja! Ahora sí tenemos al escuadrón listo. ¡En marcha!"
+		},
+		{
+			"speaker_id": "ignia",
+			"expression": "coqueta_corazon",
+			"text": "Esta aventura va a ser ardiente... ¡no se queden atrás!"
+		}
+	]
+}
